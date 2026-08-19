@@ -51,7 +51,7 @@ The final model identified three distinct customer profiles:
 
 The majority of customers exhibit relatively average balances and spending behaviour, with no particularly extreme financial characteristics.
 
-### 🟩 Cluster 1 — At-Risk / Debt Revolvers
+### 🟩 Cluster 1 — At-Risk Customers
 
 **65 customers (0.75%)**
 
