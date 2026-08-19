@@ -45,13 +45,13 @@ The final model identified three distinct customer profiles:
 
 ![Cluster Characteristic](image/cluster_characteristic.png)
 
-### 🟦 Cluster 0 — Standard Transactors
+### 🟪 Cluster 0 — Standard Transactors
 
 **8,548 customers (98.98%)**
 
 The majority of customers exhibit relatively average balances and spending behaviour, with no particularly extreme financial characteristics.
 
-### 🟥 Cluster 1 — At-Risk / Debt Revolvers
+### 🟩 Cluster 1 — At-Risk / Debt Revolvers
 
 **65 customers (0.75%)**
 
@@ -74,7 +74,6 @@ The segmentation demonstrates how unsupervised learning can translate financial 
 | High-Value VIPs      | Retention, premium services, cashback and personalised offers      |
 
 The VIP segment represents a potential revenue-focused target for premium customer strategies, while the at-risk segment may require risk mitigation rather than additional credit exposure.
----
 
 ## Methodology
 
@@ -90,43 +89,40 @@ The VIP segment represents a potential revenue-focused target for premium custom
 
 Two clustering approaches were evaluated:
 
-* **K-Means**
+#### **K-Means**
 
-Optimal k Selection: A value of k=6 was selected based on the highest Silhouette score. The Elbow Method did not show a clear inflection point, potentially due to the high-dimensional nature of the feature space.
+- **Optimal k:** 6
+- **Selection method:** Highest Silhouette Score
+- **Observation:** Provided high granularity, identifying six distinct groups (low spenders, cash borrowers, high-value customers, etc.), but suffered from overlapping clusters and noise.
 
-Observation: Provided high granularity, identifying six distinct groups (low spenders, cash borrowers, high-value customers, etc.), but suffered from overlapping clusters and noise.
+#### **Hierarchical Agglomerative Clustering**
 
-* **Hierarchical Agglomerative Clustering**
-
-  * Ward linkage
-  * Complete linkage
-  * Average linkage
-
-Linkage Comparison: Ward linkage was selected as the superior method because it produced a balanced hierarchy.
-
-Optimal k Selection: k=2 was determined to be optimal, corresponding to the largest vertical gap in the Ward dendrogram
+- **Selected linkage:** Ward
+- **Optimal k:** 2
+- **Observation:** Produced a simpler split between high spenders and casual users.
 
 Cluster quality was evaluated using:
 
 * Silhouette Score
 * Davies-Bouldin Index
 
-
 | Model                      | Optimal k | Silhouette | Davies-Bouldin | 
 | -------------------------- | --------: | ---------: | -------------: |
 | K-Means — Baseline         |         6 |     0.3046 |         1.1160 |                
-| **Hierarchical — Baseline**|          2|  **0.5621**|         1.5873 |
+| **Hierarchical — Baseline**|         2 |  **0.5621**|         1.5873 |
 
-Observation: While achieving a higher Silhouette score than K-Means, Hierarchical Agglomerative Clustering model was limited to a simple split between "high spenders" and "casual users," failing to capture more nuanced financial behaviour
+Comparison: While achieving a higher Silhouette score than K-Means, Hierarchical Agglomerative Clustering model was limited to a simple split between "high spenders" and "casual users," failing to capture more nuanced financial behaviour
 
 ### 3. Dimensionality Reduction
 
 Two dimensionality-reduction techniques were investigated:
 
-* **Principal Component Analysis (PCA)**
+#### **Principal Component Analysis (PCA)**
+
 PCA was evaluated at 90%, 95%, and 99% explained-variance thresholds. Determined that 7 components capture 90% of the variance, effectively denoising the data.
 
-* **UMAP**
+#### **UMAP**
+
 UMAP parameters were optimized via grid search (n=5, d=0.1) to capture non-linear local connectivity, resulting in dense, well-separated clumps.
 
 ### 4. Enhanced Clustering
@@ -136,7 +132,15 @@ The reduced feature representations were subsequently combined with K-Means and 
 ![Model Comparison](image/model_comparison.png)
 
 
----
+## Limitations
+
+The clustering results should be interpreted in the context of the available dataset. The optimal number of clusters depends on the business objective, and this project primarily uses the Silhouette Score for automated cluster selection. The dataset also contains highly correlated purchasing variables and very small high-value/at-risk segments, making some clusters sensitive to extreme observations.
+
+## Conclusion
+
+This project demonstrates an end-to-end application of **unsupervised machine learning for customer segmentation**, from exploratory analysis and feature engineering through dimensionality reduction, model comparison, cluster evaluation, and business interpretation.
+
+The analysis shows that reducing redundant dimensions with **PCA 90%** substantially improved clustering quality, enabling the identification of mainstream, at-risk, and high-value customer profiles.
 
 ## Technical Stack
 
@@ -156,13 +160,4 @@ Key techniques:
 * Customer profiling
 
 
-## Limitations
-
-The clustering results should be interpreted in the context of the available dataset. The optimal number of clusters depends on the business objective, and this project primarily uses the Silhouette Score for automated cluster selection. The dataset also contains highly correlated purchasing variables and very small high-value/at-risk segments, making some clusters sensitive to extreme observations.
-
-## Conclusion
-
-This project demonstrates an end-to-end application of **unsupervised machine learning for customer segmentation**, from exploratory analysis and feature engineering through dimensionality reduction, model comparison, cluster evaluation, and business interpretation.
-
-The analysis shows that reducing redundant dimensions with **PCA 90%** substantially improved clustering quality, enabling the identification of mainstream, at-risk, and high-value customer profiles.
 
