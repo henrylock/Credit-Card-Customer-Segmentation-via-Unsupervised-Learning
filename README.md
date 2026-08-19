@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This project aims to analyze the credit card usage patterns and financial behaviour of the credit cardholders to identify distinct **customer segments** using **unsupervised learning**, which translate into actionable business insights for targeted marketing and risk mitigation.
+This project aims to analyze the credit card usage patterns and financial behaviour of the credit cardholders to identify distinct **customer segments** using **unsupervised learning**, which translates into actionable business insights for targeted marketing and risk mitigation.
 This project also compares **K-Means** and **Hierarchical Agglomerative Clustering**, while investigating whether **PCA and UMAP dimensionality reduction** can improve clustering quality in a high-dimensional financial dataset.
 
 
@@ -45,7 +45,7 @@ The final model identified three distinct customer profiles:
 
 ![Cluster Characteristic](image/cluster_characteristic.png)
 
-### 🟪 Cluster 0 — Standard Transactors
+### 🟪 Cluster 0 — Regular Card Users
 
 **8,548 customers (98.98%)**
 
@@ -67,11 +67,11 @@ This small segment shows exceptionally high purchasing activity, credit limits, 
 
 The segmentation demonstrates how unsupervised learning can translate financial behaviour into actionable customer strategies:
 
-| Segment              | Potential Business Strategy                                        |
-| -------------------- | ------------------------------------------------------------------ |
-| Standard Transactors | Engagement campaigns and responsible credit utilisation incentives |
-| At-Risk Customers    | Risk monitoring, balance-transfer or debt-management products      |
-| High-Value VIPs      | Retention, premium services, cashback and personalised offers      |
+| Segment              | Potential Business Strategy                                                                              |
+| -------------------- | ---------------------------------------------------------------------------------------------------------|
+| Regular Card Users   | Increase engagement through targeted promotions, purchase incentives, and relevant card benefits         |
+| At-Risk Customers    | Encourage healthier credit usage through targeted financial education, and appropriate credit products   |
+| High-Value VIPs      | Focus on retention through premium services, exclusive rewards, personalised offers, and loyalty benefits|
 
 The VIP segment represents a potential revenue-focused target for premium customer strategies, while the at-risk segment may require risk mitigation rather than additional credit exposure.
 
@@ -144,20 +144,5 @@ The analysis shows that reducing redundant dimensions with **PCA 90%** substanti
 
 ## Technical Stack
 
-**Python · Pandas · NumPy · Scikit-learn · SciPy · Matplotlib · Seaborn · UMAP**
-
-Key techniques:
-
-* Exploratory Data Analysis
-* Feature scaling
-* Correlation analysis
-* K-Means clustering
-* Hierarchical Agglomerative Clustering
-* PCA
-* UMAP
-* Hyperparameter search
-* Cluster evaluation
-* Customer profiling
-
-
+**Python · Pandas · NumPy · Scikit-learn · SciPy · Matplotlib · Seaborn · PCA · UMAP**
 
