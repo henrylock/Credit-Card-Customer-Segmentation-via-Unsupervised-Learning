@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This project aims to analyze the credit card usage patterns and financial behaviors of the credit cardholders to identify distinct **customer segments** using **unsupervised learning**, which translate into actionable business insights for targeted marketing and risk mitigation.
+This project aims to analyze the credit card usage patterns and financial behaviour of the credit cardholders to identify distinct **customer segments** using **unsupervised learning**, which translate into actionable business insights for targeted marketing and risk mitigation.
 This project also compares **K-Means** and **Hierarchical Agglomerative Clustering**, while investigating whether **PCA and UMAP dimensionality reduction** can improve clustering quality in a high-dimensional financial dataset.
 
 
@@ -11,7 +11,9 @@ This project also compares **K-Means** and **Hierarchical Agglomerative Clusteri
 
 The dataset used in this project is the [Credit Card Customer Data](https://www.kaggle.com/datasets/fhabibimoghaddam/customer-credit-card-data) sourced from **Kaggle** . It contains **18 features** tracking the financial behavior of **8,950 cardholders**, such as balance, purchase frequency, and credit limits.
 
-Key Findings from Exploratory Data Analysis: Most financial features (e.g., Purchases, Cash Advance) show extreme right-skewness, indicating a small number of high-value customers.
+> **Note on Data Access**: The original dataset is not included in this repository. Please obtain the dataset from the original Kaggle source and place it in your project directory before running the notebook.
+
+EDA: Most financial features (e.g., Purchases, Cash Advance) show extreme right-skewness, indicating a small number of high-value customers.
 
 The correlation heatmap shows the relationships between key customer attributes.
 
@@ -19,73 +21,9 @@ The correlation heatmap shows the relationships between key customer attributes.
 
 Multicollinearity was found between some features (e.g. `PURCHASES` and `ONEOFF_PURCHASES` having high correlation), necessitating dimensionality reduction to remove redundancy.
 
-> **Note on Data Access**: The original dataset is not included in this repository. Please obtain the dataset from the original Kaggle source and place it in your project directory before running the notebook.
-
-## Methodology
-
-### 1. Data Preparation
-
-* Data Cleaning: Records with missing values (<5% of data) were dropped. Duplicate records were checked.
-* Exploratory data analysis
-* Correlation analysis
-* Normalization: Robust scaling using `RobustScaler` to handle skewed distributions and outliers, ensuring all features contributed fairly to distance-based models
-
-
-### 2. Baseline Clustering
-
-Two clustering approaches were evaluated:
-
-* **K-Means**
-Optimal k Selection: A value of k=6 was selected based on the highest Silhouette score. The Elbow Method did not show a clear inflection point, potentially due to the high-dimensional nature of the feature space.
-
-Observation: Provided high granularity, identifying six distinct groups (low spenders, cash borrowers, high-value customers, etc.), but suffered from overlapping clusters and noise.
-
-* **Hierarchical Agglomerative Clustering**
-
-  * Ward linkage
-  * Complete linkage
-  * Average linkage
-
-Linkage Comparison: Ward linkage was selected as the superior method because it produced a balanced hierarchy, whereas Complete and Average linkages resulted in single massive clusters with only a few outliers. 
-
-Optimal k Selection: k=2 was determined to be optimal, corresponding to the largest vertical gap in the Ward dendrogram
-
-Cluster quality was evaluated using:
-
-* Silhouette Score
-* Davies-Bouldin Index
-
-
-| Model                      | Optimal k | Silhouette | Davies-Bouldin | 
-| -------------------------- | --------: | ---------: | -------------: |
-| K-Means — Baseline         |         6 |     0.3046 |         1.1160 |                
-| **Hierarchical — Baseline**|          2|  **0.5621**|         1.5873 |
-
-Observation: While achieving a higher Silhouette score than K-Means, Hierarchical Agglomerative Clustering model was limited to a simple split between "high spenders" and "casual users," failing to capture more nuanced financial behaviors
-
-### 3. Dimensionality Reduction
-
-Two dimensionality-reduction techniques were investigated:
-
-* **Principal Component Analysis (PCA)**
-PCA was evaluated at 90%, 95%, and 99% explained-variance thresholds. Determined that 7 components capture 90% of the variance, effectively denoising the data.
-
-* **UMAP**
-UMAP parameters were optimized via grid search (n=5, d=0.1) to capture non-linear local connectivity, resulting in dense, well-separated clumps.
-
-### 4. Enhanced Clustering
-
-The reduced feature representations were subsequently combined with K-Means and Hierarchical Clustering to determine whether reducing redundancy and noise could improve segmentation quality.
-
----
 
 ## Key Results
 
-Dimensionality reduction substantially improved clustering performance.
-
-![Model Comparison](image/model_comparison.png)
-
-In Summary
 
 | Model                      | Optimal k | Silhouette | Davies-Bouldin |
 | -------------------------- | --------: | ---------: | -------------: |
@@ -136,6 +74,69 @@ The segmentation demonstrates how unsupervised learning can translate financial 
 | High-Value VIPs      | Retention, premium services, cashback and personalised offers      |
 
 The VIP segment represents a potential revenue-focused target for premium customer strategies, while the at-risk segment may require risk mitigation rather than additional credit exposure.
+---
+
+## Methodology
+
+### 1. Data Preparation
+
+* Data Cleaning: Records with missing values (<5% of data) were dropped. Duplicate records were checked.
+* Exploratory data analysis
+* Correlation analysis
+* Normalization: Robust scaling using `RobustScaler` to handle skewed distributions and outliers, ensuring all features contributed fairly to distance-based models
+
+
+### 2. Baseline Clustering
+
+Two clustering approaches were evaluated:
+
+* **K-Means**
+
+Optimal k Selection: A value of k=6 was selected based on the highest Silhouette score. The Elbow Method did not show a clear inflection point, potentially due to the high-dimensional nature of the feature space.
+
+Observation: Provided high granularity, identifying six distinct groups (low spenders, cash borrowers, high-value customers, etc.), but suffered from overlapping clusters and noise.
+
+* **Hierarchical Agglomerative Clustering**
+
+  * Ward linkage
+  * Complete linkage
+  * Average linkage
+
+Linkage Comparison: Ward linkage was selected as the superior method because it produced a balanced hierarchy.
+
+Optimal k Selection: k=2 was determined to be optimal, corresponding to the largest vertical gap in the Ward dendrogram
+
+Cluster quality was evaluated using:
+
+* Silhouette Score
+* Davies-Bouldin Index
+
+
+| Model                      | Optimal k | Silhouette | Davies-Bouldin | 
+| -------------------------- | --------: | ---------: | -------------: |
+| K-Means — Baseline         |         6 |     0.3046 |         1.1160 |                
+| **Hierarchical — Baseline**|          2|  **0.5621**|         1.5873 |
+
+Observation: While achieving a higher Silhouette score than K-Means, Hierarchical Agglomerative Clustering model was limited to a simple split between "high spenders" and "casual users," failing to capture more nuanced financial behaviour
+
+### 3. Dimensionality Reduction
+
+Two dimensionality-reduction techniques were investigated:
+
+* **Principal Component Analysis (PCA)**
+PCA was evaluated at 90%, 95%, and 99% explained-variance thresholds. Determined that 7 components capture 90% of the variance, effectively denoising the data.
+
+* **UMAP**
+UMAP parameters were optimized via grid search (n=5, d=0.1) to capture non-linear local connectivity, resulting in dense, well-separated clumps.
+
+### 4. Enhanced Clustering
+
+The reduced feature representations were subsequently combined with K-Means and Hierarchical Clustering to determine whether reducing redundancy and noise could improve segmentation quality.
+
+![Model Comparison](image/model_comparison.png)
+
+
+---
 
 ## Technical Stack
 
@@ -154,26 +155,6 @@ Key techniques:
 * Cluster evaluation
 * Customer profiling
 
-## Repository Structure
-
-```text
-Credit-Card-Customer-Segmentation/
-│
-├── README.md
-├── LICENSE
-│
-├── code/
-│   └── Customer_Segmentation_Credit_Card.ipynb
-│
-├── report/
-│   └── Credit_Card_Customer_Segmentation.docx
-│
-└── image/
-    ├── correlation_matrix.png
-    ├── cluster_characteristic.png
-    ├── model_comparison.png
-    └── segmentation_visualization.png
-```
 
 ## Limitations
 
