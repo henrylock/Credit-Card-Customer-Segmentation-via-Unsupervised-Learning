@@ -183,4 +183,3 @@ This project demonstrates an end-to-end application of **unsupervised machine le
 
 The analysis shows that reducing redundant dimensions with **PCA 90%** substantially improved clustering quality, enabling the identification of mainstream, at-risk, and high-value customer profiles.
 
-**Authors:** Lock Chun Hern · Lee Hong Jian
