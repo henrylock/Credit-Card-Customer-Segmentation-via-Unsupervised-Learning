@@ -160,16 +160,19 @@ Key techniques:
 Credit-Card-Customer-Segmentation/
 │
 ├── README.md
-├── LICENSE.md
-│├── code/
+├── LICENSE
+│
+├── code/
 │   └── Customer_Segmentation_Credit_Card.ipynb
-│├── report/
+│
+├── report/
 │   └── Credit_Card_Customer_Segmentation.docx
-│├── images/
-│   ├── correlation_matrix.png
-│   ├── cluster_characteristic.png
-│   ├── model_comparison.png
-│   └── segmentation_visualization.png
+│
+└── images/
+    ├── correlation_matrix.png
+    ├── cluster_characteristic.png
+    ├── model_comparison.png
+    └── segmentation_visualization.png
 ```
 
 ## Limitations
