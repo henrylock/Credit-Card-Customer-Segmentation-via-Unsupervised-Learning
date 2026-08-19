@@ -15,7 +15,7 @@ Key Findings from Exploratory Data Analysis: Most financial features (e.g., Purc
 
 The correlation heatmap shows the relationships between key customer attributes.
 
-![Correlation Heatmap](images/correlation_heatmap.png)
+![Correlation Heatmap](images/correlation_matrix.png)
 
 Multicollinearity was found between some features (e.g. `PURCHASES` and `ONEOFF_PURCHASES` having high correlation), necessitating dimensionality reduction to remove redundancy.
 
@@ -159,18 +159,17 @@ Key techniques:
 ```text
 Credit-Card-Customer-Segmentation/
 │
-├── Customer_Segmentation_Credit_Card.ipynb
 ├── README.md
-├── requirements.txt
-│
-├── images/
+├── LICENSE.md
+│├── code/
+│   └── Customer_Segmentation_Credit_Card.ipynb
+│├── report/
+│   └── Credit_Card_Customer_Segmentation.docx
+│├── images/
 │   ├── correlation_matrix.png
 │   ├── cluster_characteristic.png
 │   ├── model_comparison.png
 │   └── segmentation_visualization.png
-│
-└── data/
-    └── README.md
 ```
 
 ## Limitations
