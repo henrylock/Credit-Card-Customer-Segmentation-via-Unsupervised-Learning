@@ -15,7 +15,7 @@ Key Findings from Exploratory Data Analysis: Most financial features (e.g., Purc
 
 The correlation heatmap shows the relationships between key customer attributes.
 
-![Correlation Heatmap](images/correlation_matrix.png)
+![Correlation Heatmap](image/correlation_matrix.png)
 
 Multicollinearity was found between some features (e.g. `PURCHASES` and `ONEOFF_PURCHASES` having high correlation), necessitating dimensionality reduction to remove redundancy.
 
@@ -83,7 +83,7 @@ The reduced feature representations were subsequently combined with K-Means and 
 
 Dimensionality reduction substantially improved clustering performance.
 
-![Model Comparison](images/model_comparison.png)
+![Model Comparison](image/model_comparison.png)
 
 In Summary
 
@@ -102,10 +102,10 @@ PCA reduced the impact of highly correlated and redundant variables, allowing th
 The final model identified three distinct customer profiles:
 
 
-![Segmentation Visualization](images/segmentation_visualization.png)
+![Segmentation Visualization](image/segmentation_visualization.png)
 
 
-![Cluster Characteristic](images/cluster_characteristic.png)
+![Cluster Characteristic](image/cluster_characteristic.png)
 
 ### 🟦 Cluster 0 — Standard Transactors
 
@@ -168,7 +168,7 @@ Credit-Card-Customer-Segmentation/
 ├── report/
 │   └── Credit_Card_Customer_Segmentation.docx
 │
-└── images/
+└── image/
     ├── correlation_matrix.png
     ├── cluster_characteristic.png
     ├── model_comparison.png
